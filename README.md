@@ -115,7 +115,5 @@ Use Postman or a similar tool to test the endpoints.
 - **Data Storage:**
   - Data is stored in-memory during runtime.
   - Restarting the server will reset the data.
-
-  - The server runs on port `3000` by default.
   
 ---
