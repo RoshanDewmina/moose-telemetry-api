@@ -109,29 +109,13 @@ Use Postman or a similar tool to test the endpoints.
 
 - **Data Simulation:**
   - The telemetry data is simulated and generated at regular intervals (every 10 seconds for testing purposes).
+  - Adjust the interval to match the external API's data availability for production (5 minutes for example).
   - Each data point includes random values for `power`, `energy`, `voltage`, and updates the `timestamp` accordingly.
 
 - **Data Storage:**
   - Data is stored in-memory during runtime.
   - Restarting the server will reset the data.
 
-- **Scripts in `package.json`:**
-  - `"start": "node server.js"`
-  - `"dev": "nodemon server.js"`
-
----
-
-## Notes
-
-- **Port Configuration:**
   - The server runs on port `3000` by default.
-  - If you need to change the port, update the `port` variable in `server.js`.
-
-- **Testing Intervals:**
-  - The data fetch interval is set to every 10 seconds for testing.
-  - In a production environment, adjust the interval to match the external API's data availability.
-
-- **Extending Functionality:**
-  - For persistent data storage, consider integrating a database like MongoDB or PostgreSQL.
-
+  
 ---

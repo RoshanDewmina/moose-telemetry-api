@@ -1,12 +1,36 @@
 const express = require("express");
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = 3000;
+
 
 app.use(express.json());
 
 let telemetryData = []; // using an in-memory array to store the telemetry data
 
-// Since we dont have access to the actual external API, we can simulate fetching data from external API
+
+
+
+// async function fetchTelemetryData() {
+//   try {
+//       const response = await fetch('https:.../api/telemetry');
+//       const data = await response.json();
+//       return data.map((item, index) => ({
+//           id: `id_${index}`,
+//           power: item.power,
+//           energy: item.energy,
+//           voltage: item.voltage,
+//           status: item.status,
+//           timestamp: item.timestamp,
+//       }));
+//   } catch (error) {
+//       console.error('Error fetching telemetry data:', error);
+//       return [];
+//   }
+// }
+
+ // the commneted out function above can be used to fetch data from the external API and return it as an array of objects but since we dont have access to the actual external API, we can simulate fetching data from external API
+
 function fetchTelemetryData() {
   return {
     power: Math.floor(Math.random() * 1000),
@@ -19,13 +43,13 @@ function fetchTelemetryData() {
 
 // generate a UID for each data point, id is seperated from the featchTelemetryData function
 function generateUniqueId() {
-  return Math.random().toString(36).substring(2, 9);
+  return uuidv4();
 }
 
 // Store fetched data
 function storeTelemetryData() {
   const rawData = fetchTelemetryData();
-  rawData.id = generateUniqueId(); // creates and ID prop for data and assigns a unique ID
+  rawData.id = generateUniqueId(); // creates an ID property for data and assigns a unique ID
 
   // constructing an obj with properties in the expected order to ensure the 'id' property appears first otherwise it would be added at the end of the object
   const data = {
@@ -41,7 +65,7 @@ function storeTelemetryData() {
   console.log("Stored new telemetry data:", data);
 }
 
-// data fetching every 10 seconds for testing purposes, change to 5 mins for production, to similute fetching data at same intervals to build up a dataset over time.
+// data fetching every 10 seconds for testing purposes, (change to 5 mins for production) to similute fetching data at same intervals to build up a dataset over time.
 setInterval(storeTelemetryData, 10000);
 
 // fetch data on startup so theres at least 1 data point available
