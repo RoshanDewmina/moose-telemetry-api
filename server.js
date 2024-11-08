@@ -29,7 +29,7 @@ let telemetryData = []; // using an in-memory array to store the telemetry data
 //   }
 // }
 
- // the commneted out function above can be used to fetch data from the external API and return it as an array of objects but since we dont have access to the actual external API, we can simulate fetching data from external API
+ // the commneted out function above can be used to fetch data from an external API and return it as an array of objects but since we dont have access to the actual external API, we can simulate fetching data from external API
 
 function fetchTelemetryData() {
   return {
